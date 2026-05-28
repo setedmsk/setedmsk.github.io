@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SeteD Dev — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#080808;
+  --bg2:#111111;
+  --bg3:#1A1A1A;
+  --purple:#9333EA;
+  --purple-light:#B06EF5;
+  --purple-dim:rgba(147,51,234,0.13);
+  --purple-glow:rgba(147,51,234,0.3);
+  --white:#F2F2F2;
+  --muted:#666;
+  --muted2:#3A3A3A;
+  --line:rgba(255,255,255,0.07);
+  --serif:'Syne',sans-serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 6vw;
+  background:rgba(8,8,8,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--purple);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{font-family:var(--mono);font-size:0.72rem;color:var(--purple);border:1px solid var(--purple);padding:0.5rem 1.2rem;border-radius:3px;text-decoration:none;transition:all 0.2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--purple-dim);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:10rem 6vw 6rem;position:relative;overflow:hidden;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);}
+.hero-glow{position:absolute;top:20%;right:5%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--purple-glow) 0%,transparent 65%);pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;color:var(--purple-light);margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+.hero-tag::before{content:'//';color:var(--muted2);}
+.hero-h1{font-family:var(--serif);font-size:clamp(3.2rem,8vw,7.5rem);font-weight:800;line-height:0.95;letter-spacing:-0.03em;color:var(--white);margin-bottom:2rem;opacity:0;animation:fadeUp 0.9s 0.35s forwards;}
+.hero-h1 .accent{color:transparent;-webkit-text-stroke:1.5px var(--purple);}
+.hero-h1 .block{display:block;}
+.hero-desc{font-size:1rem;font-weight:300;line-height:1.85;color:var(--muted);max-width:500px;margin-bottom:3rem;opacity:0;animation:fadeUp 0.9s 0.5s forwards;}
+.hero-desc strong{color:var(--white);font-weight:400;}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s 0.65s forwards;}
+.btn-purple{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--white);background:var(--purple);padding:0.85rem 1.8rem;border-radius:3px;text-decoration:none;transition:all 0.25s;box-shadow:0 0 24px var(--purple-glow);}
+.btn-purple:hover{background:var(--purple-light);transform:translateY(-2px);}
+.btn-ghost{font-family:var(--mono);font-size:0.78rem;color:var(--muted);text-decoration:none;padding:0.85rem 1.2rem;border:1px solid var(--muted2);border-radius:3px;transition:all 0.2s;}
+.btn-ghost:hover{color:var(--white);border-color:var(--white);}
+.hero-scroll{position:absolute;bottom:2.5rem;left:6vw;display:flex;align-items:center;gap:0.8rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted2);opacity:0;animation:fadeIn 1s 1.2s forwards;}
+.hero-scroll-line{width:40px;height:1px;background:var(--muted2);}
+
+/* STATUS BAR */
+.status-bar{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0.9rem 6vw;display:flex;align-items:center;gap:3rem;overflow-x:auto;}
+.status-item{display:flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.7rem;color:var(--muted);white-space:nowrap;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
+.status-val{color:var(--white);}
+
+/* SECTIONS */
+section{padding:7rem 6vw;position:relative;}
+.eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--purple);margin-bottom:1.5rem;}
+.eyebrow::before{color:var(--muted2);}
+.eyebrow.n1::before{content:'01 —';}
+.eyebrow.n2::before{content:'02 —';}
+.eyebrow.n3::before{content:'03 —';}
+.eyebrow.n4::before{content:'04 —';}
+.section-h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:var(--white);margin-bottom:1.5rem;}
+.section-h2 em{font-style:normal;color:var(--purple);}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:start;}
+.about-text p{font-size:0.95rem;font-weight:300;line-height:1.9;color:rgba(242,242,242,0.6);margin-bottom:1.2rem;}
+.about-text p strong{color:var(--white);font-weight:400;}
+.about-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:2rem;}
+.chip{font-family:var(--mono);font-size:0.68rem;color:var(--purple-light);background:var(--purple-dim);border:1px solid rgba(147,51,234,0.2);padding:0.3rem 0.8rem;border-radius:2px;letter-spacing:0.04em;}
+
+/* DEPOIMENTO */
+.testimonial-card{background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:2.5rem;position:relative;overflow:hidden;}
+.testimonial-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),transparent);}
+.testimonial-card::after{content:'"';position:absolute;bottom:-2rem;right:1.5rem;font-family:var(--serif);font-size:9rem;color:rgba(147,51,234,0.06);line-height:1;pointer-events:none;}
+.testimonial-text{font-family:var(--serif);font-size:1.15rem;font-weight:400;font-style:italic;line-height:1.7;color:rgba(242,242,242,0.8);margin-bottom:1.5rem;position:relative;z-index:1;}
+.testimonial-author{display:flex;align-items:center;gap:0.8rem;}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;background:var(--purple-dim);border:1px solid rgba(147,51,234,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1rem;color:var(--purple-light);}
+.testimonial-info{}
+.testimonial-name{font-size:0.82rem;font-weight:500;color:var(--white);}
+.testimonial-role{font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.06em;margin-top:2px;}
+
+/* PROJECT */
+.projects-section{background:var(--bg2);}
+.project-intro{font-size:0.95rem;font-weight:300;line-height:1.8;color:rgba(242,242,242,0.45);max-width:520px;margin-bottom:3rem;}
+.project-card{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--bg);transition:border-color 0.3s;}
+.project-card + .project-card{margin-top:1.5rem;}
+.project-card:hover{border-color:rgba(147,51,234,0.4);}
+.project-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.project-info{padding:2.5rem;}
+.project-meta{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.project-num{font-family:var(--mono);font-size:0.65rem;color:var(--muted2);letter-spacing:0.1em;}
+.project-badge{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);background:var(--purple-dim);border:1px solid rgba(147,51,234,0.2);padding:0.2rem 0.6rem;border-radius:2px;}
+.project-name{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:0.6rem;line-height:1.2;}
+.project-client{font-family:var(--mono);font-size:0.7rem;color:var(--purple-light);letter-spacing:0.08em;margin-bottom:1.5rem;}
+.project-section-label{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:0.5rem;margin-top:1.2rem;}
+.project-desc{font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(242,242,242,0.55);}
+.project-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.5rem;}
+.project-tag{font-family:var(--mono);font-size:0.62rem;color:var(--muted);border:1px solid var(--muted2);padding:0.2rem 0.55rem;border-radius:2px;}
+.project-link{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.72rem;color:var(--purple-light);text-decoration:none;border-bottom:1px solid rgba(176,110,245,0.3);padding-bottom:2px;transition:all 0.2s;margin-top:1.5rem;}
+.project-link:hover{color:var(--white);border-color:rgba(242,242,242,0.4);}
+.project-preview-wrap{border-left:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;min-height:420px;}
+.browser-bar{background:var(--bg3);padding:0.6rem 1rem;display:flex;align-items:center;gap:0.5rem;border-bottom:1px solid var(--line);flex-shrink:0;}
+.b-dot{width:8px;height:8px;border-radius:50%;}
+.browser-url-bar{flex:1;background:rgba(255,255,255,0.04);border-radius:2px;height:18px;display:flex;align-items:center;padding:0 0.6rem;margin-left:0.4rem;}
+.browser-url-bar span{font-family:var(--mono);font-size:0.58rem;color:var(--muted2);}
+.iframe-wrap{flex:1;overflow:hidden;position:relative;}
+.iframe-wrap iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none;}
+.pingscope-mock{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;background:radial-gradient(circle at 70% 15%,rgba(147,51,234,0.16),transparent 36%),var(--bg2);}
+.phone-mock{width:min(230px,100%);border:1px solid rgba(255,255,255,0.1);border-radius:18px;background:#0d0d0d;padding:0.9rem;box-shadow:0 24px 70px rgba(0,0,0,0.45),0 0 40px rgba(147,51,234,0.12);}
+.phone-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem;}
+.phone-title{font-family:var(--serif);font-size:1.15rem;font-weight:800;color:var(--white);}
+.phone-api{font-family:var(--mono);font-size:0.55rem;color:#22c55e;border:1px solid rgba(34,197,94,0.25);border-radius:2px;padding:0.18rem 0.4rem;}
+.ping-panel{border:1px solid var(--line);border-radius:4px;background:rgba(255,255,255,0.035);padding:0.9rem;margin-bottom:0.75rem;}
+.ping-status{display:flex;align-items:center;gap:0.75rem;}
+.ping-ring{width:64px;height:64px;border-radius:50%;border:7px solid rgba(34,197,94,0.22);display:grid;place-items:center;font-family:var(--mono);font-size:0.7rem;color:#22c55e;font-weight:500;}
+.ping-label{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+.ping-online{font-family:var(--serif);font-size:1.2rem;font-weight:800;color:var(--white);line-height:1.1;margin-top:0.1rem;}
+.ping-target{font-size:0.72rem;color:var(--muted);margin-top:0.2rem;}
+.ping-chart{height:58px;border:1px solid var(--line);border-radius:4px;margin-top:0.85rem;position:relative;background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015));overflow:hidden;}
+.ping-chart::before{content:'';position:absolute;left:14%;right:14%;bottom:20px;height:2px;background:linear-gradient(90deg,transparent,var(--purple-light),#22c55e,transparent);box-shadow:34px -12px 0 -1px rgba(34,197,94,0.85),72px -4px 0 -1px rgba(176,110,245,0.95);}
+.ping-input{height:34px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;padding:0 0.7rem;font-family:var(--mono);font-size:0.66rem;color:rgba(242,242,242,0.72);margin-bottom:0.55rem;}
+.ping-button{height:36px;border-radius:4px;background:var(--purple);display:grid;place-items:center;font-family:var(--mono);font-size:0.66rem;font-weight:500;color:var(--white);box-shadow:0 0 22px var(--purple-glow);}
+.ping-history{display:grid;grid-template-columns:7px 1fr auto;align-items:center;gap:0.5rem;border:1px solid var(--line);border-radius:4px;margin-top:0.65rem;padding:0.55rem 0.6rem;font-family:var(--mono);font-size:0.58rem;color:var(--muted);}
+.ping-history::before{content:'';width:7px;height:7px;border-radius:50%;background:#22c55e;}
+.ping-history strong{color:var(--white);font-weight:500;}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem;}
+.service-card{background:var(--bg);padding:2rem 1.75rem;transition:background 0.2s;position:relative;}
+.service-card:hover{background:var(--bg3);}
+.service-card.available::after{content:'disponível';position:absolute;top:1.25rem;right:1.25rem;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#22c55e;border:1px solid rgba(34,197,94,0.25);padding:0.15rem 0.5rem;border-radius:2px;}
+.service-card.expanding::after{content:'expandindo';position:absolute;top:1.25rem;right:1.25rem;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;border:1px solid rgba(245,158,11,0.25);padding:0.15rem 0.5rem;border-radius:2px;}
+.service-icon{font-family:var(--mono);font-size:1.3rem;color:var(--purple);margin-bottom:1rem;display:block;opacity:0.7;}
+.service-card:hover .service-icon{opacity:1;}
+.service-name{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--white);margin-bottom:0.5rem;}
+.service-desc{font-size:0.78rem;font-weight:300;line-height:1.7;color:var(--muted);}
+
+/* CONTACT */
+.contact-section{background:var(--bg2);border-top:1px solid var(--line);text-align:center;}
+.contact-section .section-h2{max-width:560px;margin:0 auto 1.2rem;}
+.contact-sub{font-size:0.95rem;font-weight:300;line-height:1.8;color:var(--muted);max-width:420px;margin:0 auto 3rem;}
+.contact-methods{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+.contact-btn{display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.78rem;color:var(--white);text-decoration:none;border:1px solid var(--muted2);padding:0.9rem 1.8rem;border-radius:3px;transition:all 0.2s;}
+.contact-btn:hover{border-color:var(--purple);color:var(--purple-light);}
+.contact-btn.primary{background:var(--purple);border-color:var(--purple);box-shadow:0 0 20px var(--purple-glow);}
+.contact-btn.primary:hover{background:var(--purple-light);color:var(--white);}
+.contact-location{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted2);}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--line);padding:1.75rem 6vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:var(--serif);font-size:0.95rem;font-weight:700;color:rgba(242,242,242,0.3);text-decoration:none;}
+.footer-logo span{color:rgba(147,51,234,0.5);}
+.footer-copy{font-family:var(--mono);font-size:0.62rem;color:var(--muted2);letter-spacing:0.06em;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(147,51,234,0.5);}50%{box-shadow:0 0 0 5px rgba(147,51,234,0);}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-grid,.project-body,.services-grid{grid-template-columns:1fr;}
+  nav .nav-links{display:none;}
+  section{padding:4rem 6vw;}
+  .project-preview-wrap{border-left:none;border-top:1px solid var(--line);min-height:260px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Sete<span>D</span> Dev</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="mailto:setedmsk@gmail.com" class="nav-cta">setedmsk@gmail.com</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Desenvolvedor Web · Quirinópolis, GO</div>
+  <h1 class="hero-h1">
+    <span class="block">Pedro</span>
+    <span class="block accent">SeteD</span>
+    <span class="block">Dev.</span>
+  </h1>
+  <p class="hero-desc">
+    Crio <strong>sites e landing pages</strong> com identidade visual forte, código limpo e entrega rápida — para profissionais e pequenos negócios que precisam de presença digital de qualidade.
+  </p>
+  <div class="hero-actions">
+    <a href="#projetos" class="btn-purple">Ver projetos →</a>
+    <a href="#contato" class="btn-ghost">Falar comigo</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-item"><div class="status-dot"></div> Status: <span class="status-val">Disponível para projetos</span></div>
+  <div class="status-item">Base: <span class="status-val">Quirinópolis — GO</span></div>
+  <div class="status-item">Atende: <span class="status-val">Todo o Brasil (remoto)</span></div>
+  <div class="status-item">Stack: <span class="status-val">HTML · CSS · JS</span></div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="eyebrow n1">Sobre mim</div>
+      <h2 class="section-h2">Dev focado em<br/><em>resultado real</em></h2>
+      <p>Sou Pedro — o <strong>SeteD Dev</strong>. Desenvolvo sites e landing pages com foco em design profissional, identidade visual única e código que funciona de verdade.</p>
+      <p>Meu diferencial é <strong>velocidade sem abrir mão da qualidade</strong>: enquanto processos tradicionais levam semanas, entrego projetos completos em dias — mantendo um padrão visual que compete com trabalhos de grandes agências.</p>
+      <p>Estou no início da jornada, mas com um compromisso claro: cada entrega precisa impressionar o cliente e converter o visitante. Sem template genérico. Sem enrolação.</p>
+      <div class="about-chips">
+        <span class="chip">Landing Pages</span>
+        <span class="chip">Sites Profissionais</span>
+        <span class="chip">Design Responsivo</span>
+        <span class="chip">HTML · CSS · JS</span>
+        <span class="chip">Deploy & Domínio</span>
+        <span class="chip">Identidade Visual</span>
+      </div>
+    </div>
+
+    <!-- DEPOIMENTO -->
+    <div class="testimonial-card reveal">
+      <p class="testimonial-text">"Fiquei impressionada com o resultado. O site ficou completamente diferente do que eu tinha antes — tem a minha cara, transmite confiança, e meus pacientes têm elogiado muito."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">A</div>
+        <div class="testimonial-info">
+          <div class="testimonial-name">Dra. Amanda Montenegro</div>
+          <div class="testimonial-role">Psiquiatra · atendimento online · Brasil</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section class="projects-section" id="projetos">
+  <div class="eyebrow n2 reveal">Projetos</div>
+  <h2 class="section-h2 reveal">Trabalho <em>entregue</em></h2>
+  <p class="project-intro reveal">Projeto real, cliente real, resultado real. Cada detalhe foi pensado para converter visitante em cliente.</p>
+
+  <div class="project-card reveal">
+    <div class="project-body">
+      <div class="project-info">
+        <div class="project-meta">
+          <span class="project-num">01</span>
+          <span class="project-badge">Landing Page</span>
+          <span class="project-badge" style="color:var(--muted);background:transparent;border-color:var(--muted2);">Saúde Mental</span>
+        </div>
+        <h3 class="project-name">Dra. Amanda Montenegro</h3>
+        <p class="project-client">Psiquiatra · Atendimento online · Todo o Brasil</p>
+
+        <p class="project-section-label">O desafio</p>
+        <p class="project-desc">Site anterior genérico, sem identidade visual e sem estrutura pensada para conversão. A cliente precisava de uma presença digital que transmitisse confiança e levasse o visitante a agendar consulta.</p>
+
+        <p class="project-section-label">A solução</p>
+        <p class="project-desc">Landing page completa com design editorial exclusivo — paleta creme, verde-sálvia e terracota. Seções estratégicas: hero com CTA direto, apresentação da profissional, áreas de atuação, como funciona a consulta, FAQ e contato. Animações suaves e totalmente responsiva.</p>
+
+        <div class="project-tags">
+          <span class="project-tag">HTML · CSS · JS</span>
+          <span class="project-tag">Design Editorial</span>
+          <span class="project-tag">Responsivo</span>
+          <span class="project-tag">Animações CSS</span>
+          <span class="project-tag">Deploy Netlify</span>
+        </div>
+        <a href="https://symphonious-mousse-02a4f5.netlify.app" target="_blank" class="project-link">Ver site ao vivo ↗</a>
+      </div>
+
+      <div class="project-preview-wrap">
+        <div class="browser-bar">
+          <div class="b-dot" style="background:#FF5F57"></div>
+          <div class="b-dot" style="background:#FFBD2E"></div>
+          <div class="b-dot" style="background:#28CA42"></div>
+          <div class="browser-url-bar"><span>draamandamontenegropsiq.com</span></div>
+        </div>
+        <div class="iframe-wrap">
+          <iframe src="https://symphonious-mousse-02a4f5.netlify.app" loading="lazy" title="Dra. Amanda Montenegro — Preview"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card reveal">
+    <div class="project-body">
+      <div class="project-info">
+        <div class="project-meta">
+          <span class="project-num">02</span>
+          <span class="project-badge">Web App</span>
+          <span class="project-badge" style="color:var(--muted);background:transparent;border-color:var(--muted2);">PWA + Mobile</span>
+        </div>
+        <h3 class="project-name">PingScope</h3>
+        <p class="project-client">Ferramenta de rede · Ping em tempo real · App mobile-first</p>
+
+        <p class="project-section-label">O desafio</p>
+        <p class="project-desc">Criar uma ferramenta simples para qualquer usuario testar se um IP ou dominio esta respondendo, sem depender de comandos no terminal e com leitura rapida do status.</p>
+
+        <p class="project-section-label">A solucao</p>
+        <p class="project-desc">App com interface mobile-first, historico de testes, modo automatico e backend em Node.js executando o ping real do sistema. A base tambem ficou preparada para Expo, permitindo usar a mesma API em um app mobile.</p>
+
+        <div class="project-tags">
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">API REST</span>
+          <span class="project-tag">PWA</span>
+          <span class="project-tag">React Native · Expo</span>
+          <span class="project-tag">Network Tool</span>
+        </div>
+        <a href="#contato" class="project-link">Projeto em evolucao →</a>
+      </div>
+
+      <div class="project-preview-wrap">
+        <div class="browser-bar">
+          <div class="b-dot" style="background:#FF5F57"></div>
+          <div class="b-dot" style="background:#FFBD2E"></div>
+          <div class="b-dot" style="background:#28CA42"></div>
+          <div class="browser-url-bar"><span>pingscope.local</span></div>
+        </div>
+        <div class="pingscope-mock" aria-label="PingScope preview">
+          <div class="phone-mock">
+            <div class="phone-top">
+              <div class="phone-title">PingScope</div>
+              <div class="phone-api">API</div>
+            </div>
+            <div class="ping-panel">
+              <div class="ping-status">
+                <div class="ping-ring">28ms</div>
+                <div>
+                  <div class="ping-label">Status</div>
+                  <div class="ping-online">Online</div>
+                  <div class="ping-target">8.8.8.8 · agora</div>
+                </div>
+              </div>
+              <div class="ping-chart"></div>
+            </div>
+            <div class="ping-input">8.8.8.8</div>
+            <div class="ping-button">Pingar</div>
+            <div class="ping-history"><strong>1.1.1.1</strong><span>12ms</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="eyebrow n3 reveal">Serviços</div>
+  <h2 class="section-h2 reveal">O que eu <em>entrego</em></h2>
+  <p class="reveal" style="font-size:0.9rem;font-weight:300;line-height:1.8;color:var(--muted);max-width:520px;">Serviços marcados como <span style="font-family:var(--mono);font-size:0.7rem;color:#22c55e;border:1px solid rgba(34,197,94,0.25);padding:1px 5px;border-radius:2px;">disponível</span> são entregues hoje. Os marcados como <span style="font-family:var(--mono);font-size:0.7rem;color:#f59e0b;border:1px solid rgba(245,158,11,0.25);padding:1px 5px;border-radius:2px;">expandindo</span> estão em desenvolvimento ativo.</p>
+  <div class="services-grid reveal">
+    <div class="service-card available">
+      <span class="service-icon">◈</span>
+      <div class="service-name">Landing Pages</div>
+      <div class="service-desc">Páginas de alta conversão com design exclusivo, estrutura estratégica e foco total no objetivo do negócio.</div>
+    </div>
+    <div class="service-card available">
+      <span class="service-icon">▲</span>
+      <div class="service-name">Sites Profissionais</div>
+      <div class="service-desc">Sites completos para profissionais liberais, clínicas, consultórios e pequenas empresas — com identidade visual própria.</div>
+    </div>
+    <div class="service-card available">
+      <span class="service-icon">⌘</span>
+      <div class="service-name">Design & Identidade</div>
+      <div class="service-desc">Tipografia, paleta de cores e linguagem visual personalizadas. Seu negócio com uma cara que não parece template.</div>
+    </div>
+    <div class="service-card available">
+      <span class="service-icon">//</span>
+      <div class="service-name">Deploy & Domínio</div>
+      <div class="service-desc">Publicação completa com domínio configurado e hospedagem. Entrego o projeto funcionando no ar — sem burocracia.</div>
+    </div>
+    <div class="service-card expanding">
+      <span class="service-icon">⬡</span>
+      <div class="service-name">Aplicações Web</div>
+      <div class="service-desc">Dashboards, ferramentas internas e sistemas sob medida. Em desenvolvimento ativo — projetos por consulta.</div>
+    </div>
+    <div class="service-card expanding">
+      <span class="service-icon">◎</span>
+      <div class="service-name">Produtos SaaS</div>
+      <div class="service-desc">MVPs de produtos digitais com modelo de assinatura. Em desenvolvimento ativo — projetos por consulta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contact-section" id="contato">
+  <div class="eyebrow" style="justify-content:center;margin-bottom:1rem;">Contato</div>
+  <h2 class="section-h2 reveal">Tem um projeto<br/>em <em>mente?</em></h2>
+  <p class="contact-sub reveal">Me manda uma mensagem descrevendo o que você precisa. Respondo rápido e sem enrolação.</p>
+  <div class="contact-methods reveal">
+    <a href="https://wa.me/55" class="contact-btn primary">WhatsApp →</a>
+    <a href="mailto:setedmsk@gmail.com" class="contact-btn">setedmsk@gmail.com</a>
+  </div>
+  <span class="contact-location reveal">Quirinópolis · Goiás · Brasil · Atende todo o Brasil</span>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Sete<span>D</span> Dev</a>
+  <span class="footer-copy">© 2026 Pedro · SeteD Dev</span>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
